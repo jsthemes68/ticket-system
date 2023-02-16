@@ -1,5 +1,6 @@
 const eventBus = {
   on(event, callback) {
+    console.log(event)
     document.addEventListener(event, (e) => callback(e.detail));
   },
   dispatch(event, data) {

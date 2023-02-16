@@ -14,11 +14,6 @@ class UserService {
           headers: {access_token: 'access_token_2aed7b42814263bd626fb6579300b08ef798030f'}
         })
         .then(response => {
-          console.log(response);
-          return 'pppppp';
-          /*if (response.data.token) {
-            localStorage.setItem("user", JSON.stringify(response.data));
-          }*/
           return response.data;
         });
   }
@@ -36,5 +31,5 @@ class UserService {
   }
 
 }
-
-export default new UserService();
+const userService = new UserService();
+export default userService;

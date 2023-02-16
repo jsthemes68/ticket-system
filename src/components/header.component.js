@@ -16,7 +16,6 @@ export default class Header extends Component {
     }
     componentDidMount() {
         const currentUser = AuthService.getCurrentUser();
-        console.log(currentUser);
         if (currentUser) {
             this.setState({
                 currentUser: currentUser,
@@ -24,9 +23,15 @@ export default class Header extends Component {
                 showModeratorBoard: currentUser.roles.includes("ROLE_MODERATOR"),
                 showAdminBoard: currentUser.roles.includes("ROLE_ADMIN"),
             });
-        }else{
-            this.setState({ redirect: "/home" });
         }
+    }
+    logOut(){
+        AuthService.logout();
+        this.setState({
+            showModeratorBoard: false,
+            showAdminBoard: false,
+            currentUser: undefined,
+        });
     }
     render() {
         const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
@@ -75,9 +80,7 @@ export default class Header extends Component {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <a href="/login" className="nav-link" onClick={this.logOut}>
-                                LogOut
-                            </a>
+                            <a href="/login" className="nav-link" onClick={this.logOut}>LogOut</a>
                         </li>
                     </div>
                 ) : (
