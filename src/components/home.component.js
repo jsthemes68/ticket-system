@@ -8,13 +8,25 @@ import UserService from "../services/user.service";
 export default class Home extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
-            content: "fgdfgdf"
+            content: ""
         };
     }
     componentDidMount() {
-        UserService.getPublicContent().then(
+
+        UserService.getTypeMaintenance().then(
+            response => {
+                this.setState({
+                    content: response.data
+                });
+            },
+            error => {
+                this.setState({
+                    content: 'mmmm'
+                });
+            }
+        );
+        /*UserService.getPublicContent().then(
             response => {
                 this.setState({
                     content: response.data
@@ -28,7 +40,8 @@ export default class Home extends Component {
                         error.toString()
                 });
             }
-        );
+        );*/
+
     }
 
     render() {
